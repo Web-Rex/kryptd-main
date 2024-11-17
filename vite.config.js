@@ -15,7 +15,7 @@ export default defineConfig({
     NodeGlobalsPolyfillPlugin({
       buffer: true,
     }),
-    nodePolyfills({ include: ['fs', 'stream'] })
+    nodePolyfills()
   ],
   server: {
     watch: {
