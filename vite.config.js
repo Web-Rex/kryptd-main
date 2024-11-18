@@ -1,13 +1,13 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+// import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   resolve: {
-    alias: {
-      stream: "stream-browserify",
-    },
+    // alias: {
+    //   stream: "stream-browserify",
+    // },
   },
 
   plugins: [
@@ -15,7 +15,7 @@ export default defineConfig({
     // NodeGlobalsPolyfillPlugin({
     //   buffer: true,
     // }),
-    nodePolyfills({ include: ['fs', 'stream'] }),
+    nodePolyfills(),
   ],
   server: {
     watch: {
@@ -30,5 +30,6 @@ export default defineConfig({
     // necessary for segment analytics lib to work
     global: {},
     "process.env": process.env,
+    "process.browser": true,
   },
 });
