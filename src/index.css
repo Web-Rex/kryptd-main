@@ -42,3 +42,12 @@
     transform: rotate(-360deg);
   }
 }
+
+
+.form-g {
+  @apply w-full;
+}
+
+.mint_inp {
+  @apply w-full;
+}

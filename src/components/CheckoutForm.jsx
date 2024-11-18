@@ -64,45 +64,54 @@ export default function CheckoutForm({ submitOrder, loading }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="checkout-form">
-      <h2>Billing Information</h2>
+    <form onSubmit={handleSubmit} className="w-full p-7 bg-slate-100 rounded-md shadow-md">
+      <h2 className="mb-7">Billing Information</h2>
 
-      <div className="form-group">
-        <label>Full Name</label>
-        <input
-          type="text"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
+      <div className="flex gap-5 justify-between">
+        <div className="form-group w-full">
+          <label className="ml-2">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            className="mint_inp"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group w-full">
+          <label className="ml-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            className="mint_inp"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
       </div>
 
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label>Phone</label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-        <div className="form-group">
-          <label>Size</label>
+      <div className="flex gap-5 justify-between">
+        {" "}
+        <div className="form-group form-g">
+          <label className="ml-2">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            className="mint_inp"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group form-g">
+          <label className="ml-2">Size</label>
           <select
             name="size"
             value={formData.size}
+            className="mint_inp"
             onChange={handleSizeChange}
             required
           >
@@ -115,47 +124,53 @@ export default function CheckoutForm({ submitOrder, loading }) {
         </div>
       </div>
 
-      <h2>Shipping Address</h2>
+      <h2 className="my-7">Shipping Address</h2>
 
-      <div className="form-group">
-        <label>Address Line 1</label>
-        <input
-          type="text"
-          name="addressLine1"
-          value={formData.addressLine1}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label>City</label>
-        <input
-          type="text"
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="form-row">
-        <div className="form-group">
-          <label>State/Province</label>
+      <div className="flex gap-5 justify-between">
+        <div className="form-group form-g">
+          <label className="ml-2">Address Line 1</label>
           <input
             type="text"
-            name="state"
-            value={formData.state}
+            name="addressLine1"
+            className="mint_inp"
+            value={formData.addressLine1}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="form-group">
-          <label>Postal Code</label>
+        <div className="form-group form-g">
+          <label className="ml-2">City</label>
+          <input
+            type="text"
+            name="city"
+            className="mint_inp"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-5 justify-between">
+        {" "}
+        <div className="form-group form-g">
+          <label className="ml-2">State/Province</label>
+          <input
+            type="text"
+            name="state"
+            className="mint_inp"
+            value={formData.state}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group form-g">
+          <label className="ml-2">Postal Code</label>
           <input
             type="text"
             name="postalCode"
+            className="mint_inp"
             value={formData.postalCode}
             onChange={handleChange}
             required
@@ -164,7 +179,7 @@ export default function CheckoutForm({ submitOrder, loading }) {
       </div>
 
       <div className="form-group">
-        <label>Country</label>
+        <label className="ml-2">Country</label>
         <input
           type="text"
           name="country"
@@ -173,6 +188,8 @@ export default function CheckoutForm({ submitOrder, loading }) {
           required
         />
       </div>
+
+      <div className="pb-5"></div>
 
       <button
         type="submit"
