@@ -6,6 +6,7 @@ const Successful = () => {
   const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const user_name = location.state.id;
 
     console.log(user_name);
