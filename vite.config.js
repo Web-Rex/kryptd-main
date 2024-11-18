@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
+import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 export default defineConfig({
   resolve: {
@@ -15,7 +15,7 @@ export default defineConfig({
     NodeGlobalsPolyfillPlugin({
       buffer: true,
     }),
-    nodePolyfills()
+    nodePolyfills(),
   ],
   server: {
     watch: {
