@@ -43,7 +43,7 @@ function Order() {
                     <th className=''>Price</th>
                     <th className=''>Quantity</th>
                     <th className=''>Total</th>
-                    <th className=''></th>
+                    {/* <th className=''></th> */}
                   </tr>
                 </thead>
                 {

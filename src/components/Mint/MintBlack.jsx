@@ -5,10 +5,11 @@ import { publicKey } from "@metaplex-foundation/umi";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { walletAdapterIdentity } from "@metaplex-foundation/js";
 import { fetchorderById, saveOrderInfo } from "../../firebase/query";
-import CheckoutForm from "../CheckoutForm"; 
+import CheckoutForm from "../CheckoutForm";
 import { toast } from "react-toastify";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { Metaplex } from "@metaplex-foundation/js";
+import { useNavigate } from "react-router-dom";
 const QUICKNODE_RPC = "https://api.devnet.solana.com"; // 👈 Replace with your QuickNode Solana Devnet HTTP Endpoint
 const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC, {
   commitment: "finalized",
@@ -17,10 +18,13 @@ const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC, {
 function MintBlack({ color }) {
   const [loading, setLoading] = useState(false);
   const [candyMachineAddress, setCandyMachineAddress] = useState(null);
-  
-  const wallet = useWallet();
 
-  const METAPLEX = Metaplex.make(SOLANA_CONNECTION).use(walletAdapterIdentity(wallet));
+  const wallet = useWallet();
+  const navigate = useNavigate();
+
+  const METAPLEX = Metaplex.make(SOLANA_CONNECTION).use(
+    walletAdapterIdentity(wallet)
+  );
 
   async function mintEachNFT() {
     console.log("Minting each NFT...");
@@ -34,7 +38,7 @@ function MintBlack({ color }) {
       },
       { commitment: "finalized" }
     );
-  
+
     console.log(`✅ - Minted NFT: ${nft.address.toString()}`);
     console.log(
       `     https://explorer.solana.com/address/${nft.address.toString()}?cluster=devnet`
@@ -46,7 +50,9 @@ function MintBlack({ color }) {
 
   useEffect(() => {
     const fetchOrderData = async () => {
-      const order = await fetchorderById('4fd7R1QJZqX9JcVRqTqBfJxJUAchW745EvHDVTHoyvDR');
+      const order = await fetchorderById(
+        "4fd7R1QJZqX9JcVRqTqBfJxJUAchW745EvHDVTHoyvDR"
+      );
       console.log("Order", order);
     };
     fetchOrderData();
@@ -60,21 +66,31 @@ function MintBlack({ color }) {
     }
     setCandyMachineAddress(address); // Установка адреса Candy Machine
     console.log("Candy Machine Address : ", address);
-    console.log("color : ", color)
+    console.log("color : ", color);
   }, [color]);
 
-  const mainnetEndpoint = import.meta.env.VITE_NEXT_PUBLIC_RPC || "https://api.mainnet-beta.solana.com";
-  console.log("---------------------------\n", mainnetEndpoint)
+  const mainnetEndpoint =
+    import.meta.env.VITE_NEXT_PUBLIC_RPC ||
+    "https://api.mainnet-beta.solana.com";
+  console.log("---------------------------\n", mainnetEndpoint);
 
   const set_loading = (val = false) => {
-    setLoading(priv => val);
-  }
+    setLoading((priv) => val);
+  };
 
   const handleOrderSubmission = async (orderData, size) => {
     console.log("Order Submitted:", orderData);
     set_loading(true);
 
-    await mintNFT(orderData, size);
+    const results = await mintNFT(orderData, size);
+
+    console.log(results);
+    if (results.status === true)
+      setTimeout(() => {
+        navigate("/order-successful", {
+          state: { id: orderData?.fullName },
+        });
+      }, 3000);
     set_loading();
   };
 
@@ -83,7 +99,7 @@ function MintBlack({ color }) {
       console.log("Minting NFT...");
 
       await mintEachNFT();
-      
+
       const billingInfo = {
         name: orderData.fullName,
         email: orderData.email,
@@ -100,16 +116,27 @@ function MintBlack({ color }) {
       };
 
       console.log("NFT Metadata:", nftMetadata);
-      await saveOrderInfo(wallet.publicKey.toString(), nftMetadata, billingInfo);
+      await saveOrderInfo(
+        wallet.publicKey.toString(),
+        nftMetadata,
+        billingInfo
+      );
 
+      return { status: true };
     } catch (error) {
       console.error("Mint failed:", error);
       toast.warn("Mint failed! Please try again.");
+      return { status: false };
     }
   };
 
   function generateRandomTrait() {
-    const traits = ["Discount Rate for Krypt Products", "Access to VIP Events", "Exclusive Community Access", "Gift Box Access"];
+    const traits = [
+      "Discount Rate for Krypt Products",
+      "Access to VIP Events",
+      "Exclusive Community Access",
+      "Gift Box Access",
+    ];
     const randomIndex = Math.floor(Math.random() * traits.length);
     return traits[randomIndex];
   }
