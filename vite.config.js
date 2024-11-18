@@ -12,10 +12,10 @@ export default defineConfig({
 
   plugins: [
     react(),
-    NodeGlobalsPolyfillPlugin({
-      buffer: true,
-    }),
-    nodePolyfills(),
+    // NodeGlobalsPolyfillPlugin({
+    //   buffer: true,
+    // }),
+    nodePolyfills({ include: ['fs', 'stream'] }),
   ],
   server: {
     watch: {

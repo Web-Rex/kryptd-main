@@ -15,6 +15,7 @@ const SOLANA_CONNECTION = new Connection(QUICKNODE_RPC, {
 });
 
 function MintBlack({ color }) {
+  const [loading, setLoading] = useState(false);
   const [candyMachineAddress, setCandyMachineAddress] = useState(null);
   
   const wallet = useWallet();
@@ -65,9 +66,16 @@ function MintBlack({ color }) {
   const mainnetEndpoint = import.meta.env.VITE_NEXT_PUBLIC_RPC || "https://api.mainnet-beta.solana.com";
   console.log("---------------------------\n", mainnetEndpoint)
 
+  const set_loading = (val = false) => {
+    setLoading(priv => val);
+  }
+
   const handleOrderSubmission = async (orderData, size) => {
     console.log("Order Submitted:", orderData);
+    set_loading(true);
+
     await mintNFT(orderData, size);
+    set_loading();
   };
 
   const mintNFT = async (orderData, size) => {
@@ -108,7 +116,7 @@ function MintBlack({ color }) {
 
   return (
     <div>
-      <CheckoutForm submitOrder={handleOrderSubmission} />
+      <CheckoutForm submitOrder={handleOrderSubmission} loading={loading} />
     </div>
   );
 }
