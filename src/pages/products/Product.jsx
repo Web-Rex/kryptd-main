@@ -77,72 +77,69 @@ function Product() {
               <div className="bg-white py-10 px-2 md:px-8">
                 <div
                   key={product.unique_id}
-                  className=" md:grid md:grid-cols-2 relative flex flex-col items-center gap-5 m-1 rounded-md "
+                  className=" lg:grid md:grid-cols-2 relative gap-10 m-1 rounded-md "
                 >
-                  <div
-                    className={` bg-green-600 font-semibold px-5 py-1 uppercase text-white rounded-md fixed top-2 left-1 ${
-                      addedToCart ? "translate-x-5" : "-translate-x-[700px]"
-                    } transition-all`}
-                  >
-                    <p>Item Added To Cart</p>
-                  </div>
-                  <section className=" ">
+                  <section className="flex flex-col">
+                    <div className="sm:flex justify-between  px-2 py-2 mt-5">
+                      <h2 className=" font-semibold text-3xl text-left sm:mb-0 mb-3">
+                        {product.name}
+                      </h2>
+                      <p className=" text-gray-900 font-light text-lg uppercase">
+                        Published:{" "}
+                        <span className=" font-semibold text-base">{`${date.toLocaleDateString()}`}</span>
+                      </p>
+                    </div>
+                    <div className="mb-10 border-b-[1px] border-gray-600 text-gray-800 sm:flex items-center justify-between  px-2 py-2">
+                      <p className=" text-gray-900 font-semibold text-xl">
+                        ${product.price}
+                      </p>
+                      <div className=" flex gap-4 items-center  font-semibold text-[16px] ">
+                        Limited Edition{" "}
+                        <img
+                          src={limited_img}
+                          className=" size-8"
+                          alt="Limited"
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full h-full flex justify-center items-center">
                     <img
                       src={product.img}
                       alt="NFT"
-                      className={` size-72 lg:size-96 rounded-md`}
+                      className={` size-72 md:size-[23rem] lg:size-[30rem] rounded-md`}
                     />
+                    </div>
                   </section>
-                  <section className=" w-full  flex flex-col gap-5">
+                  <section className=" w-full lg:mt-0 mt-10 flex flex-col gap-5">
                     <MintBlack color={product.color} />
                   </section>
-                </div>
 
-                <section className="sm:flex justify-between  px-2 py-2 mt-5">
-                  <h2 className=" font-semibold text-3xl text-left sm:mb-0 mb-3">{product.name}</h2>
-                  <p className=" text-gray-900 font-light text-lg uppercase">
-                    Published:{" "}
-                    <span className=" font-semibold text-base">{`${date.toLocaleDateString()}`}</span>
-                  </p>
-                </section>
-                <section className="border-b-[1px] border-gray-600 text-gray-800 sm:flex items-center justify-between  px-2 py-2">
-                  <p className=" text-gray-900 font-semibold text-xl">
-                    ${product.price}
-                  </p>
-                  <ul className=" pb-4 flex flex-col gap-1">
-                    <li className=" flex gap-4 items-center  font-semibold text-[16px] ">
-                      Limited Edition{" "}
-                      <img
-                        src={limited_img}
-                        className=" size-8"
-                        alt="Limited"
-                      />
-                    </li>
-                    <li className=" text-lg uppercase font-semibold ">
+                  <div>
+                    <h1 className="lg:my-0 my-10 text-lg uppercase font-semibold ">
                       Krypt Collection
-                    </li>
-                  </ul>
-                </section>
+                    </h1>
+                    <article className=" lg:mt-3 mb-7 bg-gray-100 px-3 py-3 rounded font-medium text-lg">
+                      {product.description}
+                    </article>
 
-                <article className=" mt-3 mb-7 bg-gray-100 px-3 py-3 rounded font-medium text-lg">
-                  {product.description}
-                </article>
-
-                <article className=" md:col-span-2">
-                  The wait is over! You can now mint your limited edition KRYPT
-                  NFT shirt collection on the Solana blockchain. With only 100
-                  unique pieces available, don&apos;t miss your chance to own a
-                  piece of digital fashion history. Once you select your NFT
-                  shirt, press the Mint button to receive a unique digital asset
-                  with: - Exclusive digital fashion Art. Randomized Gifts and
-                  amazing Treasures will be assigned to your Token&apos;s
-                  Address. Our lucky winners will be Notified immediately after
-                  Minting an item in our collection. This is our way of saying
-                  our customers are priority at the KRYPT brand. Join the KRYPT
-                  community and be part of an ever-expanding universe of fashion
-                  and art. Mint your NFT shirt now and unlock exclusive
-                  experiences, prizes, and more
-                </article>
+                    <article className=" md:col-span-2">
+                      The wait is over! You can now mint your limited edition
+                      KRYPT NFT shirt collection on the Solana blockchain. With
+                      only 100 unique pieces available, don&apos;t miss your
+                      chance to own a piece of digital fashion history. Once you
+                      select your NFT shirt, press the Mint button to receive a
+                      unique digital asset with: - Exclusive digital fashion
+                      Art. Randomized Gifts and amazing Treasures will be
+                      assigned to your Token&apos;s Address. Our lucky winners
+                      will be Notified immediately after Minting an item in our
+                      collection. This is our way of saying our customers are
+                      priority at the KRYPT brand. Join the KRYPT community and
+                      be part of an ever-expanding universe of fashion and art.
+                      Mint your NFT shirt now and unlock exclusive experiences,
+                      prizes, and more
+                    </article>
+                  </div>
+                </div>
               </div>
             );
           })
