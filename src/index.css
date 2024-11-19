@@ -51,3 +51,7 @@
 .mint_inp {
   @apply w-full;
 }
+
+.form-pg {
+  @apply sm:flex gap-5 justify-between;
+}

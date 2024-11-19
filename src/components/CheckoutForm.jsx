@@ -64,10 +64,10 @@ export default function CheckoutForm({ submitOrder, loading }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full p-7 bg-slate-100 rounded-md shadow-md">
-      <h2 className="mb-7">Billing Information</h2>
+    <form onSubmit={handleSubmit} className="w-full p-5 bg-slate-100 rounded-md shadow-md">
+      <h2 className="mb-5">Billing Information</h2>
 
-      <div className="flex gap-5 justify-between">
+      <div className="form-pg">
         <div className="form-group w-full">
           <label className="ml-2">Full Name</label>
           <input
@@ -93,7 +93,7 @@ export default function CheckoutForm({ submitOrder, loading }) {
         </div>
       </div>
 
-      <div className="flex gap-5 justify-between">
+      <div className="form-pg">
         {" "}
         <div className="form-group form-g">
           <label className="ml-2">Phone</label>
@@ -124,9 +124,9 @@ export default function CheckoutForm({ submitOrder, loading }) {
         </div>
       </div>
 
-      <h2 className="my-7">Shipping Address</h2>
+      <h2 className="my-5">Shipping Address</h2>
 
-      <div className="flex gap-5 justify-between">
+      <div className="form-pg">
         <div className="form-group form-g">
           <label className="ml-2">Address Line 1</label>
           <input
@@ -152,7 +152,7 @@ export default function CheckoutForm({ submitOrder, loading }) {
         </div>
       </div>
 
-      <div className="flex gap-5 justify-between">
+      <div className="form-pg">
         {" "}
         <div className="form-group form-g">
           <label className="ml-2">State/Province</label>
